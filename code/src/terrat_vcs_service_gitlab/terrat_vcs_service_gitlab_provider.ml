@@ -4230,6 +4230,16 @@ module Work_manifest = struct
                     value = Terrat_config.api_base (Api.Config.config config) ^ "/gitlab";
                     variable_type = "env_var";
                   };
+                  {
+                    key = "TERRATEAM_ACTION_TYPE";
+                    value = (match work_manifest.Wm.target with
+                            | Terrat_vcs_provider2.Target.Drift _ -> "drift"
+                            | _ ->
+                              (match CCList.last_opt work_manifest.Wm.steps with
+                              | Some step -> Terrat_work_manifest3.Step.to_action_type step
+                              | None -> "unknown"));
+                    variable_type = "env_var";
+                  };
                 ];
         }
       in
