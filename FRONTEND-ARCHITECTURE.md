@@ -459,7 +459,7 @@ export const repositoriesLoading: Writable<boolean> = writable(false);
 **Strengths**:
 - **Automatic Dependencies**: Svelte tracks reactive dependencies
 - **Performance**: Only re-runs when dependencies change
-- **Clean Syntax**: More readable than useEffect patterns
+- **Clean Syntax**: Simpler than traditional effect hook patterns
 
 #### 2. **Store Integration** ⭐⭐⭐⭐
 ```svelte
@@ -522,7 +522,7 @@ export const runs: Writable<Run[]> = writable([]);
 **Recommendation**: Use local component state and pass props down
 
 #### 2. **Missing Error Boundaries**
-Svelte doesn't have React-style error boundaries, but the app lacks error handling patterns:
+Svelte doesn't have built-in error boundaries like some frameworks, but the app lacks error handling patterns:
 
 ```svelte
 <!-- No error boundary pattern -->
@@ -608,26 +608,26 @@ fontSize: {
 // Recommended component library structure
 interface DesignSystemComponents {
   // Form Components
-  Input: React.ComponentType<InputProps>;
-  Select: React.ComponentType<SelectProps>;
-  Checkbox: React.ComponentType<CheckboxProps>;
-  RadioGroup: React.ComponentType<RadioGroupProps>;
+  Input: typeof Input;
+  Select: typeof Select;
+  Checkbox: typeof Checkbox;
+  RadioGroup: typeof RadioGroup;
   
   // Feedback Components  
-  Alert: React.ComponentType<AlertProps>;
-  Toast: React.ComponentType<ToastProps>;
-  Modal: React.ComponentType<ModalProps>;
-  Tooltip: React.ComponentType<TooltipProps>;
+  Alert: typeof Alert;
+  Toast: typeof Toast;
+  Modal: typeof Modal;
+  Tooltip: typeof Tooltip;
   
   // Data Display
-  Table: React.ComponentType<TableProps>;
-  Badge: React.ComponentType<BadgeProps>;
-  Avatar: React.ComponentType<AvatarProps>;
+  Table: typeof Table;
+  Badge: typeof Badge;
+  Avatar: typeof Avatar;
   
   // Navigation
-  Breadcrumb: React.ComponentType<BreadcrumbProps>;
-  Pagination: React.ComponentType<PaginationProps>;
-  Tabs: React.ComponentType<TabsProps>;
+  Breadcrumb: typeof Breadcrumb;
+  Pagination: typeof Pagination;
+  Tabs: typeof Tabs;
 }
 ```
 
