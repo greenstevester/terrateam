@@ -6,6 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Terrateam** is an open-source Terraform automation platform that runs plans and applies in pull requests. Built to handle thousands of workspaces across monorepos, it features GitOps workflows, policy enforcement, cost estimation, and drift detection. The architecture consists of OCaml backend services and a modern Svelte frontend (Iris).
 
+## Documentation
+
+### Workflow Documentation
+- **[Workflow Environment Variables](docs/WORKFLOW-ENVIRONMENT-VARIABLES.md)** - Complete guide to environment variables available in Terrateam workflows, including the new TERRATEAM_ACTION_TYPE for conditional workflow logic
+
 ## Development Commands
 
 ### OCaml Backend Development (in `/code` directory)

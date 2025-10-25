@@ -36,6 +36,14 @@ module Step = struct
     | Plan -> "plan"
     | Unsafe_apply -> "unsafe-apply"
 
+  let to_action_type = function
+    | Apply -> "apply"
+    | Build_config -> "config_builder"
+    | Build_tree -> "tree_builder"
+    | Index -> "index"
+    | Plan -> "plan"
+    | Unsafe_apply -> "apply"
+
   let of_string = function
     | "apply" -> Some Apply
     | "build-config" -> Some Build_config

@@ -19,6 +19,7 @@ module Step : sig
     | Unsafe_apply
 
   val to_string : t -> string
+  val to_action_type : t -> string
   val of_string : string -> t option
 end
 

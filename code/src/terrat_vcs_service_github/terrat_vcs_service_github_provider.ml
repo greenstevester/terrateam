@@ -4702,6 +4702,14 @@ module Work_manifest = struct
                                              `String
                                                (Terrat_config.api_base (Api.Config.config config)
                                                ^ "/github") );
+                                           ( "TERRATEAM_ACTION_TYPE",
+                                             `String
+                                               (match work_manifest.Wm.target with
+                                               | Terrat_vcs_provider2.Target.Drift _ -> "drift"
+                                               | _ ->
+                                                 (match CCList.last_opt work_manifest.Wm.steps with
+                                                 | Some step -> Terrat_work_manifest3.Step.to_action_type step
+                                                 | None -> "unknown")) );
                                          ]
                                         @ (match work_manifest.Wm.environment with
                                           | Some env -> [ ("environment", `String env) ]
