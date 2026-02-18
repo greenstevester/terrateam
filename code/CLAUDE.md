@@ -1,31 +1,75 @@
-# Psyching up
-- You are a professional OCaml developer
-- You are fantastic at matching the style of an existing project.
-- When you don't know how to do something, you consult the existing code in the project and match it.
+# CLAUDE.md - Backend (OCaml)
 
-# Dune and make files
-- Never try to update dune files.
-- Never try to update Makefiles.
-- When updating the build, modify pds.conf.
+This file provides guidance for Claude Code when working with the OCaml backend in `code/`.
 
-# Editing Ocaml files
-- After editing an Ocaml file, run ocamlformat -i src/<module>/<filename>
-- After an edit build the terrat make target to verify the change is correct.
+## Mindset
 
-# Building
-- To build <target> run make -k -j$(nproc) <target>
-- To build the Terrateam API schemas run make terrat-schemas
-- To build Terrateam client and server run make terrat
-- Always use `tail` to reduce the amount of data being processed when building.
-- If building fails, run make <target> and use tail to get the build error.
+- You are a professional OCaml developer.
+- Match the style of the existing project. When you don't know how, consult existing code.
 
-# Testing
-- To test <target> run make test-{release,debug}_<target>
-- Unit tests go in `code/tests/<name>` where <name> matches the library in `code/src/<name>`
+## Build System
 
-# Style
-- When using long module names, create a short alias name using `let module`, i.e. `let module <short_name> = <long name> in`.
-- Always use snakecase in identifier names.  For example prefer `String_set` in place of `StringSet`.
-- When doing a local module open to construct or match against a record, always use `{ Module. field; ... }` instead of `Module.{ field; ... }`.
-- When making new types, prefer to create a new module with a single `type t`.
-- Errors are represented as polymorphic variants. The type name will be `err` or end in `_err`. All polymorphic variant constructors will end in `_err`. The type will derive the show ppx, e.g. `type err = [ \`Some_err ] [@@deriving show]`.
+- **Never update dune files or Makefiles.** Modify `pds.conf` instead.
+- After editing an OCaml file: `ocamlformat -i src/<module>/<filename>`
+- After an edit, build the terrat make target to verify: `make -k -j$(nproc) <target>`
+- Always use `tail` to reduce output when diagnosing build failures.
+- To build schemas: `make terrat-schemas`
+- To build client and server: `make terrat`
+
+## Testing
+
+- To test: `make test-{release,debug}_<target>`
+- Unit tests go in `code/tests/<name>` matching the library in `code/src/<name>`
+
+## OCaml Style
+
+- **Module aliases**: For long module names, use `let module M = Long_module_name in`.
+- **Snakecase**: Always use snakecase. Prefer `String_set` over `StringSet`.
+- **Record field access**: Use `{ Module. field; ... }` not `Module.{ field; ... }`.
+- **New types**: Prefer creating a new module with `type t`.
+- **Errors**: Polymorphic variants. Type named `err` or ending in `_err`. Constructors end in `_err`. Always derive show:
+  ```ocaml
+  type err = [ `Some_err ] [@@deriving show]
+  ```
+
+## Module Organization
+
+**Framework layers:**
+- `abb*` — Async Building Blocks (custom async runtime, I/O, curl, TCP, TLS, caching)
+- `brtl*` — Web framework (HTTP handlers, session middleware, logging, pagination)
+
+**Domain modules:**
+- `terrat` — Core application logic
+- `terrat_vcs_api_*` / `terrat_vcs_service_*` — VCS abstraction (GitHub, GitLab)
+- `terrat_tag_query*` — Tag Query Language (lexer, parser, AST, SQL generation)
+- `terrat_work_manifest3` — Work manifest lifecycle
+- `terrat_change_match3` — Change detection and dirspace matching
+- `terrat_access_control2` — RBAC and authorization
+- `terrat_config` / `terrat_repo_config` — Configuration management
+
+**Generated modules (do not edit manually):**
+- `terrat_api` — Generated from `api_schemas/terrat/api.json`
+- `terrat_github_webhooks` — Generated from webhook JSON schemas
+- `terrat_repo_config` — Generated from config JSON schema
+- `githubc2` — Generated GitHub API client
+- `gitlabc` — Generated GitLab API client
+
+## Async Patterns
+
+```ocaml
+open Abb.Future.Syntax
+
+let process_request request =
+  let* validation_result = validate_request request in
+  let* data = fetch_data validation_result in
+  let* result = transform_data data in
+  return result
+```
+
+## Adding New API Endpoints
+
+1. Edit `api_schemas/terrat/api.json`
+2. `make terrat-api` to regenerate OCaml types
+3. Implement endpoint in the appropriate `terrat_*` module
+4. Add tests in `tests/`
+5. Build and test: `make -k -j$(nproc) release-terrat && make test-terrat`
