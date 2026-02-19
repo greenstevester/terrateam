@@ -12,7 +12,7 @@ Terrateam is an open-source Terraform automation platform that runs plans and ap
 terrateam/
 ├── code/                    # OCaml backend + Svelte frontend
 │   ├── Makefile             # Build orchestration (includes generated pds.mk)
-│   ├── pds.conf             # PDS package definitions (193+ modules)
+│   ├── pds.conf             # PDS package definitions (220+ modules)
 │   ├── hll.pins             # Exact dependency versions
 │   ├── .ocamlformat         # OCaml formatter config
 │   └── src/
@@ -80,6 +80,31 @@ cd docker/terrat/
 docker-compose up setup      # Setup wizard at http://localhost:3000
 docker-compose up            # Full stack (db, server, terratunnel)
 ```
+
+## macOS Native Build Prerequisites
+
+The primary build targets are Linux and FreeBSD (via Docker). macOS native builds are supported with additional setup:
+
+```bash
+# Required: opam environment
+eval $(opam env)
+
+# Required: libretls for TLS bindings
+brew install libretls curl
+
+# Required: environment variables for libretls
+export LIBRARY_PATH="$(brew --prefix libretls)/lib:$(brew --prefix curl)/lib:$LIBRARY_PATH"
+export C_INCLUDE_PATH="$(brew --prefix libretls)/include:$(brew --prefix curl)/include:$C_INCLUDE_PATH"
+export PKG_CONFIG_PATH="$(brew --prefix curl)/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# Required: Rust toolchain (for jsonschema_check and minijinja modules)
+rustup update stable
+
+# Required: opam packages
+opam install ocurl dynamic_gc --assume-depexts
+```
+
+macOS uses native kqueue (no vendored libkqueue needed). Platform-specific build configuration is managed via `selector.macos` entries in `pds.conf`.
 
 ## OCaml Conventions
 

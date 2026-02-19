@@ -29,6 +29,11 @@ Terrateam uses a comprehensive set of bash scripts to handle deployment, release
 - **Purpose**: Determine if current tag represents latest stable version
 - **Logic**: Semantic version comparison and branch validation
 
+#### **`upload_release_assets`**
+- **Purpose**: Upload build artifacts to GitHub releases
+- **Integration**: GitHub API for release asset management
+- **Usage**: Typically invoked by CI/CD after release creation
+
 ### 2. **Container Operations**
 
 #### **`create_manifest`**

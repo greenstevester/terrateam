@@ -154,7 +154,9 @@ api_schemas/terrat/api.json
 **Makefile Targets:**
 ```makefile
 # Generate all schemas
-terrat-schemas: terrat-api terrat-repo-config terrat-webhooks github-api gitlab-api
+terrat-schemas: terrat-api terrat-repo-config terrat-webhooks terrat-capabilities
+terrat-schemas: terrat-job-context terrat-job
+terrat-schemas: github-api gitlab-api
 
 # Individual schema generation
 terrat-api: debug_openapi_cli release_openapi_cli
@@ -162,6 +164,15 @@ terrat-api: debug_openapi_cli release_openapi_cli
 
 terrat-repo-config: debug_json_schema_hooks_cli release_json_schema_hooks_cli
 	json_schema_hooks_cli convert --input config-schema.json --output-dir ./src/terrat_repo_config
+
+terrat-capabilities: debug_json_schema_hooks_cli release_json_schema_hooks_cli
+	# Generates capability validation types
+
+terrat-job-context: debug_json_schema_hooks_cli release_json_schema_hooks_cli
+	# Generates job context types
+
+terrat-job: debug_json_schema_hooks_cli release_json_schema_hooks_cli
+	# Generates job definition types
 ```
 
 ## Development Commands
@@ -176,6 +187,9 @@ make terrat-schemas
 # Regenerate specific schemas
 make terrat-api              # Main API
 make terrat-repo-config      # Configuration validation
+make terrat-capabilities     # Capability validation
+make terrat-job-context      # Job context types
+make terrat-job              # Job definition types
 make github-api              # GitHub API client
 make gitlab-api              # GitLab API client
 

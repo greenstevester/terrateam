@@ -26,7 +26,7 @@ Terrateam is a sophisticated open-source Terraform automation platform built wit
 ### Key Architectural Principles
 
 - **Schema-First Development**: OpenAPI specifications drive type-safe code generation
-- **Modular Microservices**: 193+ OCaml modules with precise dependency management
+- **Modular Microservices**: 220+ OCaml modules with precise dependency management
 - **Multi-Platform Deployment**: Docker containerization with multi-architecture support
 - **Type Safety**: End-to-end type safety from API to UI using OCaml and TypeScript
 - **Performance-Oriented**: Custom async runtime (ABB) optimized for I/O-heavy operations
@@ -144,7 +144,7 @@ graph LR
 
 ### 2. Build System (PDS/Make)
 
-The build system uses **PDS (Package Description System)** for managing 193+ OCaml modules with precise dependency tracking.
+The build system uses **PDS (Package Description System)** for managing 220+ OCaml modules with precise dependency tracking.
 
 #### Build Architecture Flow
 
@@ -190,7 +190,7 @@ graph TB
 ```
 
 **Module Dependency Architecture:**
-- **193+ OCaml modules** organized by functional domains
+- **220+ OCaml modules** organized by functional domains
 - **ABB Framework**: Application Building Blocks for async operations
 - **BRTL Framework**: Web framework components
 - **Domain Modules**: Terraform-specific business logic
@@ -246,7 +246,7 @@ graph TB
 **Key Backend Patterns:**
 - **High-performance async runtime** with platform-specific optimizations
 - **Result-based error handling** with comprehensive error types
-- **Domain-driven module organization** (193+ modules)
+- **Domain-driven module organization** (220+ modules)
 - **Type-safe API layer** with generated OCaml types
 
 ### 4. Frontend (Iris - Svelte)
@@ -423,7 +423,7 @@ graph LR
 
 ### 2. Domain-Driven Design (DDD)
 
-**Pattern**: 193+ modules organized by business domains rather than technical layers.
+**Pattern**: 220+ modules organized by business domains rather than technical layers.
 
 **Domain Organization:**
 - **VCS Integration**: `terrat_vcs_*`, `terrat_github`, `terrat_gitlab`
@@ -937,7 +937,7 @@ Terrateam's architecture represents a sophisticated, multi-layer system designed
 
 1. **Type Safety**: End-to-end type safety from database to UI
 2. **Performance**: Custom async runtime optimized for I/O operations
-3. **Modularity**: 193+ modules with precise dependency management
+3. **Modularity**: 220+ modules with precise dependency management
 4. **Scalability**: Microservices architecture with container orchestration
 5. **Developer Experience**: Schema-driven development with generated types
 6. **Security**: Comprehensive security layers with OAuth and RBAC

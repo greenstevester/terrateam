@@ -4,7 +4,7 @@ This file provides guidance for Claude Code when working with Terrateam's build 
 
 ## Build System Overview
 
-Terrateam uses a sophisticated **PDS (Package Description System)** build architecture that manages 193+ OCaml modules with precise dependency tracking and multi-target compilation.
+Terrateam uses a sophisticated **PDS (Package Description System)** build architecture that manages 220+ OCaml modules with precise dependency tracking and multi-target compilation.
 
 ## Architecture Components
 
@@ -45,7 +45,7 @@ extra_compiler_opts = "-g -bin-annot -strict-sequence -strict-formats -safe-stri
 [global.release]  
 extra_compiler_opts = "-bin-annot -strict-sequence -strict-formats -safe-string -noassert -w '+d+f+p+u+s+40+K+L+R'"
 
-# 193+ module definitions with dependencies
+# 220+ module definitions with dependencies
 [src.abb]
 install = true
 deps = ["abb_intf", "abb_scheduler_select"]
@@ -155,7 +155,7 @@ pds -c                  # Clean PDS cache
 ### Module Dependency Graph
 
 ```
-193+ OCaml Modules
+220+ OCaml Modules
 ├── abb_* (Application Building Blocks)
 │   ├── abb              # Core async runtime
 │   ├── abb_io           # I/O operations  
@@ -211,9 +211,14 @@ deps = ["abb_intf", "abb_scheduler_select"]
 [src.abb.selector.freebsd]
 deps = ["abb_intf", "abb_scheduler_kqueue"]
 
-[src.abb.selector.linux]  
+[src.abb.selector.linux]
+deps = ["abb_intf", "abb_scheduler_kqueue"]
+
+[src.abb.selector.macos]
 deps = ["abb_intf", "abb_scheduler_kqueue"]
 ```
+
+**Note:** macOS uses native kqueue (no `-lkqueue` needed), while Linux uses a vendored `libkqueue` polyfill. Rust FFI modules (`jsonschema_check`, `minijinja`) require `-framework CoreFoundation -framework SystemConfiguration` on macOS.
 
 ### Compilation Flags
 
