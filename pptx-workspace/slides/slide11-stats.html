@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><style>
+html { background: #0B1622; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, sans-serif; display: flex; background-image: url('bg-dark.png'); background-size: cover; }
+.wrap { margin: 22pt 40pt; width: 640pt; display: flex; flex-direction: column; align-items: center; }
+.hdr h2 { color: #17A2B8; font-size: 11pt; text-transform: uppercase; letter-spacing: 2pt; margin: 0 0 4pt 0; font-weight: bold; text-align: center; }
+h1 { color: #FFFFFF; font-size: 22pt; margin: 0 0 16pt 0; text-align: center; }
+.grid { display: flex; gap: 16pt; flex-wrap: wrap; justify-content: center; }
+.stat { width: 145pt; background: rgba(23,162,184,0.06); border: 1pt solid rgba(23,162,184,0.15); padding: 16pt 12pt; text-align: center; }
+.stat p { margin: 0; }
+.stat .num { color: #17A2B8; font-size: 28pt; font-weight: bold; font-family: 'Courier New', monospace; }
+.stat .lbl { color: #667788; font-size: 9pt; text-transform: uppercase; letter-spacing: 1pt; margin-top: 4pt; }
+.stat2 { width: 145pt; background: rgba(231,76,60,0.06); border: 1pt solid rgba(231,76,60,0.15); padding: 16pt 12pt; text-align: center; }
+.stat2 p { margin: 0; }
+.stat2 .num { color: #E74C3C; font-size: 28pt; font-weight: bold; font-family: 'Courier New', monospace; }
+.stat2 .lbl { color: #667788; font-size: 9pt; text-transform: uppercase; letter-spacing: 1pt; margin-top: 4pt; }
+.foot { margin-top: 20pt; }
+.foot p { color: #556677; font-size: 9pt; margin: 0; text-align: center; font-style: italic; }
+</style></head><body>
+<div class="wrap">
+  <div class="hdr"><h2>By The Numbers</h2></div>
+  <img src="accent-teal.png" style="width: 40pt; height: 2pt; margin-bottom: 14pt;">
+  <h1>Evidence &amp; Statistics</h1>
+  <div class="grid">
+    <div class="stat"><p class="num">1,407</p><p class="lbl">Total Commits</p></div>
+    <div class="stat"><p class="num">428</p><p class="lbl">Merged PRs</p></div>
+    <div class="stat"><p class="num">112</p><p class="lbl">#978 Commits</p></div>
+    <div class="stat2"><p class="num">9</p><p class="lbl">Revert Commits</p></div>
+    <div class="stat"><p class="num">6.5</p><p class="lbl">Months Dev Time</p></div>
+    <div class="stat"><p class="num">8,156</p><p class="lbl">Old Evaluator Lines</p></div>
+    <div class="stat"><p class="num">~357K</p><p class="lbl">New Evaluator Lines</p></div>
+    <div class="stat"><p class="num">4</p><p class="lbl">Performance PRs</p></div>
+  </div>
+  <div class="foot"><p>All commit SHAs verified against main branch — generated from git history analysis</p></div>
+</div>
+</body></html>

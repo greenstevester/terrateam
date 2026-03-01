@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><style>
+html { background: #0B1622; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, sans-serif; display: flex; background-image: url('bg-dark.png'); background-size: cover; }
+.wrap { margin: 30pt 40pt; width: 640pt; }
+.hdr { display: flex; align-items: center; gap: 10pt; margin-bottom: 4pt; }
+.hdr h2 { color: #17A2B8; font-size: 11pt; text-transform: uppercase; letter-spacing: 2pt; margin: 0; font-weight: bold; }
+h1 { color: #FFFFFF; font-size: 24pt; margin: 0 0 16pt 0; }
+.card { background: rgba(23,162,184,0.08); border-left: 4pt solid #17A2B8; padding: 12pt 16pt; margin-bottom: 14pt; }
+.card p { color: #CCD6DD; font-size: 11pt; margin: 0; line-height: 1.6; }
+.card p b { color: #FFFFFF; }
+.bottom { display: flex; gap: 16pt; margin-top: 8pt; }
+.pill { background: rgba(231,76,60,0.12); border: 1pt solid rgba(231,76,60,0.3); padding: 8pt 14pt; flex: 1; }
+.pill p { color: #E74C3C; font-size: 10pt; margin: 0; font-weight: bold; }
+.pill .sub { color: #AA6666; font-weight: normal; font-size: 9pt; }
+.pill2 { background: rgba(243,156,18,0.12); border: 1pt solid rgba(243,156,18,0.3); padding: 8pt 14pt; flex: 1; }
+.pill2 p { color: #F39C12; font-size: 10pt; margin: 0; font-weight: bold; }
+.pill2 .sub { color: #AA8844; font-weight: normal; font-size: 9pt; }
+.pill3 { background: rgba(23,162,184,0.12); border: 1pt solid rgba(23,162,184,0.3); padding: 8pt 14pt; flex: 1; }
+.pill3 p { color: #17A2B8; font-size: 10pt; margin: 0; font-weight: bold; }
+.pill3 .sub { color: #5599AA; font-weight: normal; font-size: 9pt; }
+</style></head><body>
+<div class="wrap">
+  <div class="hdr"><h2>Executive Summary</h2></div>
+  <img src="accent-teal.png" style="width: 40pt; height: 2pt; margin-bottom: 14pt;">
+  <h1>Why Terrateam Changed</h1>
+  <div class="card"><p>The primary cause is <b>PR #978 — the "New-Age" Evaluator rewrite</b>. This 6.5-month effort replaced the monolithic event evaluator with a dependency-graph-based architecture.</p></div>
+  <div class="card"><p>First deployed <b>January 5, 2026</b>, suffered <b>6 rollback cycles</b> over 21 days, and became the stable default on <b>January 26, 2026</b>.</p></div>
+  <div class="card"><p>Significant database performance work landed alongside: <b>PostgreSQL binary wire protocol</b>, <b>bulk work manifest loading</b>, and <b>connection pool fairness</b> fixes.</p></div>
+  <div class="bottom">
+    <div class="pill"><p>PR #978<br><span class="sub">Core evaluator rewrite</span></p></div>
+    <div class="pill2"><p>4 Performance PRs<br><span class="sub">#1084, #1085, #1123, #1130</span></p></div>
+    <div class="pill3"><p>9 Bug Fixes<br><span class="sub">Drift, status, YAML, base branch</span></p></div>
+  </div>
+</div>
+</body></html>
